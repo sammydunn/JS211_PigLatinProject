@@ -1,5 +1,6 @@
 'use strict';
 
+const { strict } = require('assert');
 // brings in the assert module for unit testing
 const assert = require('assert');
 // brings in the readline module to access the command line
@@ -11,10 +12,24 @@ const rl = readline.createInterface({
 });
 
 
-const pigLatin = (word) => {
+let pigLatin = (input) => {
 
-  // Your code here
+  let word = input.replace(/\s+/g, '').toLowerCase();
+  console.log(word)
 
+  let findFirstVowelPosition = (word) => {
+    for (let i=0; i<word,length; i++) {
+      if ('aeiou' .indexOf(word[i]) !== -1) {
+        return i;
+      }
+    }
+  }
+
+  let firstPosition = findFirstVowelPosition(word)
+  if (firstPosition > 0) {
+    return word.slice(firstPosition) + '.' + word.slice(0, firstPosition) + 'ay';
+  }
+  return word + '-yay';
 }
 
 // the first function called in the program to get an input from the user
@@ -22,7 +37,7 @@ const pigLatin = (word) => {
 // to close it ctrl + C
 const getPrompt = () => {
   rl.question('word ', (answer) => {
-    console.log( pigLatin(answer) );
+    console.log(pigLatin(answer) );
     getPrompt();
   });
 }
